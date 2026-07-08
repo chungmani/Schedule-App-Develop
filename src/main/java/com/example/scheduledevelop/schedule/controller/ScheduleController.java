@@ -34,22 +34,22 @@ public class ScheduleController {
     @GetMapping("/{scheduleId}")
     public ResponseEntity<GetScheduleResponse> getSchedule(
             @PathVariable Long userId,
-            @PathVariable Long scheduleId
-    ) {
+            @PathVariable Long scheduleId) {
         return ResponseEntity.status(HttpStatus.OK).body(scheduleService.getOne(userId, scheduleId));
     }
 
     @PutMapping("/{scheduleId}")
     public ResponseEntity<UpdateScheduleResponse> updateSchedule(
+            @PathVariable Long userId,
             @PathVariable Long scheduleId,
             @RequestBody UpdateScheduleRequest request
     ) {
-        return ResponseEntity.status(HttpStatus.OK).body(scheduleService.update(scheduleId, request));
+        return ResponseEntity.status(HttpStatus.OK).body(scheduleService.update(userId, scheduleId, request));
     }
 
     @DeleteMapping("/{scheduleId}")
-    public ResponseEntity<Void> delete(@PathVariable Long scheduleId) {
-        scheduleService.delete(scheduleId);
+    public ResponseEntity<Void> delete(@PathVariable Long userId, @PathVariable Long scheduleId) {
+        scheduleService.delete(userId, scheduleId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
