@@ -28,8 +28,7 @@ public class Schedule extends BaseEntity {
         this.content = content;
     }
 
-    public void updateSchedule(String author, String title, String content) {
-        this.author = author;
+    public void updateSchedule(String title, String content) {
         this.title = title;
         this.content = content;
     }
