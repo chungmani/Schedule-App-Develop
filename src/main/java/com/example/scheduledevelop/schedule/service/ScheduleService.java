@@ -58,7 +58,7 @@ public class ScheduleService {
     @Transactional
     public void delete(Long scheduleId) {
         Schedule schedule = getOrThrow(scheduleId);
-        scheduleRepository.deleteById(scheduleId);
+        scheduleRepository.deleteById(schedule.getId());
     }
 
     // 공통메서드
