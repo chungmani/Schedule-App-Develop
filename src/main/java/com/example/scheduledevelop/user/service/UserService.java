@@ -3,6 +3,7 @@ package com.example.scheduledevelop.user.service;
 import com.example.scheduledevelop.user.dto.*;
 import com.example.scheduledevelop.user.entity.User;
 import com.example.scheduledevelop.user.repository.UserRepository;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -56,6 +57,21 @@ public class UserService {
     public void delete(Long userId) {
         User user = getOrThrow(userId);
         userRepository.deleteById(user.getUserId());
+    }
+
+    // 유저 로그인
+    @Transactional
+    public LoginResponse login(LoginRequest request, HttpSession session) {
+        User user = userRepository.findByEmail(request.getEmail()).orElseThrow(
+                () -> new IllegalStateException("이메일 또는 비밀번호가 일치하지 않습니다.")
+        );
+        if (!request.getPassword().equals(user.getPassword())) {
+            throw new IllegalArgumentException("이메일 또는 비밀번호가 일치하지 않습니다.");
+        }
+
+        SessionUser sessionUser = new SessionUser(user.getUserId(), user.getEmail());
+        session.setAttribute("loginUser", sessionUser);
+        return new LoginResponse(user.getUserId(), user.getEmail());
     }
 
     // 공통메서드
