@@ -1,6 +1,5 @@
 package com.example.scheduledevelop.user.service;
 
-import com.example.scheduledevelop.schedule.dto.GetScheduleResponse;
 import com.example.scheduledevelop.user.dto.*;
 import com.example.scheduledevelop.user.entity.User;
 import com.example.scheduledevelop.user.repository.UserRepository;

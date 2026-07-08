@@ -11,30 +11,32 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/schedules")
+@RequestMapping("/users/{userId}/schedules")
 public class ScheduleController {
 
     private final ScheduleService scheduleService;
 
     @PostMapping
     public ResponseEntity<CreateScheduleResponse> createSchedule(
+            @PathVariable Long userId,
             @RequestBody CreateScheduleRequest request
     ) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(scheduleService.create(request));
+        return ResponseEntity.status(HttpStatus.CREATED).body(scheduleService.create(userId, request));
     }
 
     // 전체 조회
     @GetMapping
-    public ResponseEntity<List<GetScheduleResponse>> getSchedules() {
-        return ResponseEntity.status(HttpStatus.OK).body(scheduleService.getAll());
+    public ResponseEntity<List<GetScheduleResponse>> getSchedules(@PathVariable Long userId) {
+        return ResponseEntity.status(HttpStatus.OK).body(scheduleService.getAll(userId));
     }
 
     //단건 조회
     @GetMapping("/{scheduleId}")
     public ResponseEntity<GetScheduleResponse> getSchedule(
+            @PathVariable Long userId,
             @PathVariable Long scheduleId
     ) {
-        return ResponseEntity.status(HttpStatus.OK).body(scheduleService.getOne(scheduleId));
+        return ResponseEntity.status(HttpStatus.OK).body(scheduleService.getOne(userId, scheduleId));
     }
 
     @PutMapping("/{scheduleId}")
