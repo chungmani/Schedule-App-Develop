@@ -3,6 +3,7 @@ package com.example.scheduledevelop.schedule.service;
 import com.example.scheduledevelop.schedule.dto.*;
 import com.example.scheduledevelop.schedule.entity.Schedule;
 import com.example.scheduledevelop.schedule.repository.ScheduleRepository;
+import com.example.scheduledevelop.user.dto.SessionUser;
 import com.example.scheduledevelop.user.entity.User;
 import com.example.scheduledevelop.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

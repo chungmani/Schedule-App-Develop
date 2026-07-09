@@ -13,10 +13,10 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/users")
 public class UserController {
 
     private final UserService userService;
-    @RequestMapping("/users")
 
     // 유저 등록
     @PostMapping
@@ -28,7 +28,7 @@ public class UserController {
 
     // 유저 로그인
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest request, HttpSession session) {
+    public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest request, HttpSession session) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.login(request, session));
     }
 
